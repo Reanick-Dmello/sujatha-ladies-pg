@@ -54,16 +54,12 @@ export default function Reviews() {
 
           {/* Rating Summary */}
 
-          <div className="bg-pink-50 rounded-3xl p-10 text-center mb-12">
-            <h3 className="text-6xl font-bold text-pink-600">4.9</h3>
+          <div className="grid md:grid-cols-3 gap-5 max-w-4xl mx-auto mb-16">
+            <StatCard value="4.9★" label="Resident Rating" />
 
-            <div className="flex justify-center gap-2 mt-4">
-              {[...Array(5)].map((_, i) => (
-                <FaStar key={i} className="text-yellow-400 text-2xl" />
-              ))}
-            </div>
+            <StatCard value="120+" label="Happy Residents" />
 
-            <p className="text-gray-600 mt-4">Based on resident reviews</p>
+            <StatCard value="24×7" label="Security" />
           </div>
 
           {/* Review Cards */}
@@ -168,5 +164,15 @@ export default function Reviews() {
         </Swiper>
       </div>
     </section>
+  );
+}
+
+function StatCard({ value, label }) {
+  return (
+    <div className="bg-white rounded-2xl border border-pink-100 py-8 text-center shadow-sm hover:shadow-lg transition">
+      <h3 className="text-4xl font-bold text-pink-600">{value}</h3>
+
+      <p className="mt-2 text-gray-500">{label}</p>
+    </div>
   );
 }

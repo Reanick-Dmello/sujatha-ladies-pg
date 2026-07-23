@@ -8,20 +8,38 @@ import Reviews from "./components/Reviews";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import WhatsAppButton from "./components/WhatsAppButton";
+import { useEffect, useState } from "react";
+import LoadingScreen from "./components/LoadingScreen";
 
 function App() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2200);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <>
-      <Navbar />
-      <Hero />
-      <About />
-      <Rooms />
-      <Facilities />
-      <Gallery />
-      <Reviews />
-      <Contact />
-      <Footer />
-      <WhatsAppButton />
+      <LoadingScreen loading={loading} />
+
+      {!loading && (
+        <>
+          <Navbar />
+          <Hero />
+          <About />
+          <Rooms />
+          <Facilities />
+          <Gallery />
+          <Reviews />
+          <Contact />
+          <Footer />
+          <WhatsAppButton />
+        </>
+      )}
     </>
   );
 }

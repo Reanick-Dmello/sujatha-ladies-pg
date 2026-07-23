@@ -7,18 +7,29 @@ import {
   FaCalendarAlt,
 } from "react-icons/fa";
 
-import hero from "../assets/hero.jpg";
+import useSanityQuery from "../hooks/useSanityQuery";
+import { websiteQuery } from "../lib/queries";
+import { urlFor } from "../lib/image";
 
 export default function DesktopHero() {
+  const { data: website, loading } = useSanityQuery(websiteQuery);
+
+  if (loading || !website) return null;
+
   return (
     <section id="home" className="pt-28 pb-10 px-4 bg-[#faf7f8]">
       <div className="max-w-7xl mx-auto relative overflow-hidden rounded-[32px] shadow-[0_30px_80px_rgba(0,0,0,0.16)] min-h-[700px]">
         {/* Background Image */}
         <img
-          src={hero}
-          alt=""
+          src={
+            website.heroImage
+              ? urlFor(website.heroImage).width(2000).quality(90).url()
+              : ""
+          }
+          alt={website.heroTitle || "Hero"}
           className="absolute inset-0 w-full h-full object-cover"
         />
+        
         {/* Premium Gradient */}
         <div
           className="absolute inset-0"
@@ -39,7 +50,7 @@ export default function DesktopHero() {
         <div className="relative z-20 flex flex-col justify-center min-h-[700px] pl-12 pr-10 lg:pl-20 lg:pr-16 max-w-[720px]">
           {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-pink-100 text-pink-600 px-4 py-2 rounded-full text-sm font-semibold w-fit">
-            ❤️ SAFE. COMFORTABLE. LIKE HOME.
+            {website.heroBadge}
           </div>
           {/* Heading */}
           <h1
@@ -90,9 +101,15 @@ export default function DesktopHero() {
             <button className="bg-pink-600 hover:bg-pink-700 text-white h-14 px-8 rounded-2xl font-semibold backdrop-blur-md flex items-center gap-2 shadow-lg hover:shadow-pink-300/40 transition-all duration-300 hover:-translate-y-1">
               <FaCalendarAlt /> Book a Visit
             </button>
-            <button className="border-2 border-pink-500 bg-white hover:bg-pink-50 backdrop-blur-md text-pink-600 h-14 px-8 rounded-2xl font-semibold flex items-center gap-2 shadow-lg hover:shadow-pink-300/40 transition-all duration-300 hover:-translate-y-1">
-              <FaWhatsapp /> WhatsApp Now
-            </button>
+            <a
+              href={`https://wa.me/${website.whatsapp}`}
+              target="_blank"
+              rel="noreferrer"
+              className="border-2 border-pink-500 bg-white hover:bg-pink-50 backdrop-blur-md text-pink-600 h-14 px-8 rounded-2xl font-semibold flex items-center gap-2 shadow-lg hover:shadow-pink-300/40 transition-all duration-300 hover:-translate-y-1"
+            >
+              <FaWhatsapp />
+              {website.secondaryButton}
+            </a>
           </div>
         </div>
         {/* Floating Availability Card */}
@@ -119,9 +136,14 @@ export default function DesktopHero() {
               <span className="text-green-600 font-semibold">Available</span>
             </div>
           </div>
-          <button className="mt-5 w-full h-14 rounded-2xl bg-pink-600 text-white font-semibold hover:-translate-y-1 transition-all shadow-lg">
+          <a
+            href={`https://wa.me/${website.whatsapp}`}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-5 w-full h-14 rounded-2xl bg-pink-600 text-white font-semibold hover:-translate-y-1 transition-all shadow-lg flex items-center justify-center"
+          >
             Reserve on WhatsApp
-          </button>
+          </a>
         </div>
       </div>
     </section>

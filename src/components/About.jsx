@@ -1,7 +1,15 @@
 import { FaFemale, FaBroom, FaRupeeSign, FaHome } from "react-icons/fa";
+import useSanityQuery from "../hooks/useSanityQuery";
+import { websiteQuery } from "../lib/queries";
+import { urlFor } from "../lib/image";
+
 import about from "../assets/about.jpg";
 
 export default function About() {
+  const { data: website, loading } = useSanityQuery(websiteQuery);
+
+  if (loading || !website) return null;
+
   return (
     <section id="about" className="py-16 lg:py-28 bg-white">
       <div className="max-w-7xl mx-auto px-5">
@@ -12,8 +20,12 @@ export default function About() {
 
           <div>
             <img
-              src={about}
-              alt="About PG"
+              src={
+                website?.heroImage
+                  ? urlFor(website.aboutImage).width(1800).url()
+                  : ""
+              }
+              alt={website.aboutTitle || "About"}
               className="rounded-[36px] w-full h-[650px] object-cover shadow-[0_20px_50px_rgba(0,0,0,0.12)] hover:scale-[1.02] transition duration-500"
             />
           </div>

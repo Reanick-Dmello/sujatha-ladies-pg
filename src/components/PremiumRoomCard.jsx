@@ -9,6 +9,9 @@ import {
   MessageCircle,
   Star,
 } from "lucide-react";
+import useSanityQuery from "../hooks/useSanityQuery";
+import { websiteQuery } from "../lib/queries";
+import { urlFor } from "../lib/image";
 
 const iconMap = {
   "Attached Bathroom": Bath,
@@ -18,6 +21,8 @@ const iconMap = {
 };
 
 export default function PremiumRoomCard({ room }) {
+  const { data: website } = useSanityQuery(websiteQuery);
+
   return (
     <motion.div
       whileHover={{ y: -10 }}
@@ -28,7 +33,11 @@ export default function PremiumRoomCard({ room }) {
 
       <div className="relative overflow-hidden h-[200px]">
         <img
-          src={room.image}
+          src={
+            room.images?.length
+              ? urlFor(room.images[0]).width(900).height(600).url()
+              : ""
+          }
           alt={room.title}
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
@@ -53,14 +62,6 @@ export default function PremiumRoomCard({ room }) {
       {/* CONTENT */}
 
       <div className="px-5 py-3">
-        {/* PRICE */}
-
-        <div className="flex items-end gap-2">
-          <h2 className="text-2xl font-bold text-pink-600">{room.price}</h2>
-
-          <span className="text-gray-400 mb-1">/month</span>
-        </div>
-
         {/* TITLE */}
 
         <h3
@@ -75,22 +76,23 @@ export default function PremiumRoomCard({ room }) {
         {/* FEATURES */}
 
         <div className="grid grid-cols-2 gap-3 mt-3">
-          {room.features.map((item) => {
-            const Icon = iconMap[item];
+          {(room.features || []).map((feature) => {
+            const Icon = iconMap[feature] || Bath;
 
             return (
               <div
-                key={item}
-                className="flex items-center gap-3 rounded-2xl bg-gradient-to-br from-pink-50 to-white px-4 py-2 hover:scale-105 transition-all duration-300 cursor-default"
+                key={feature}
+                className="flex items-center gap-3 rounded-2xl bg-gradient-to-br from-pink-50 to-white px-4 py-3"
               >
-                <Icon size={18} className="text-pink-600" />
+                <Icon size={18} className="text-pink-600 flex-shrink-0" />
 
-                <span className="text-sm font-medium">{item}</span>
+                <span className="text-sm font-medium text-gray-700">
+                  {feature}
+                </span>
               </div>
             );
           })}
         </div>
-
         {/* Divider */}
 
         <div className="my-2 border-t border-gray-100" />
@@ -100,7 +102,7 @@ export default function PremiumRoomCard({ room }) {
         <motion.a
           whileHover={{ x: 4 }}
           whileTap={{ scale: 0.98 }}
-          href="https://wa.me/919876543210"
+          href={`https://wa.me/${website?.whatsapp}`}
           target="_blank"
           rel="noreferrer"
           className="flex items-center justify-center gap-3 h-14 rounded-2xl text-white font-semibold transition bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 shadow-lg hover:shadow-pink-300/50"

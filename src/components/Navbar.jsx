@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
+import logo from "../assets/logo.png";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -19,9 +20,25 @@ export default function Navbar() {
       <nav className="hidden md:block glass-nav fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-7xl z-50">
         <div className="px-6">
           <div className="flex justify-between items-center h-20">
-            <div>
-              <h1 className="text-3xl font-bold text-pink-600">Sujatha</h1>
-              <p className="text-xs tracking-[4px] text-gray-500">LADIES PG</p>
+            <div className="flex items-center">
+              <img
+                src={logo}
+                alt="Sujatha Ladies PG"
+                className="w-16 h-16 object-contain flex-shrink-0"
+              />
+
+              <div>
+                <h1
+                  className="text-[38px] font-bold leading-none text-pink-600"
+                  style={{ fontFamily: "'Playfair Display', serif" }}
+                >
+                  Sujatha
+                </h1>
+
+                <p className="mt-1 text-[11px] tracking-[5px] font-semibold text-gray-500">
+                  LADIES PG
+                </p>
+              </div>
             </div>
 
             <div className="hidden md:flex gap-8">
@@ -71,25 +88,40 @@ export default function Navbar() {
         <div className="bg-white shadow-[0_8px_30px_rgba(0,0,0,0.08)] px-6 h-20 flex items-center justify-between">
           {/* Logo */}
 
-          <div>
-            <h1
-              className="text-[34px] font-bold text-pink-600 leading-none"
-              style={{
-                fontFamily: "'Playfair Display', serif",
-              }}
-            >
-              Sujatha
-            </h1>
+          <a href="#home" className="flex items-center">
+            <img
+              src={logo}
+              alt="Sujatha Ladies PG"
+              className="w-14 h-14 object-contain flex-shrink-0"
+            />
 
-            <p className="text-[12px] tracking-[5px] text-gray-500 mt-2">
-              LADIES PG
-            </p>
-          </div>
+            <div>
+              <h1
+                className="text-[24px] font-bold leading-none text-pink-600"
+                style={{
+                  fontFamily: "'Playfair Display', serif",
+                }}
+              >
+                Sujatha
+              </h1>
+
+              <p className="mt-1 text-[11px] tracking-[5px] font-semibold text-gray-500">
+                LADIES PG
+              </p>
+            </div>
+          </a>
 
           {/* Menu */}
 
-          <button onClick={() => setOpen(!open)} className="text-gray-800">
-            {open ? <HiX size={36} /> : <HiMenu size={36} />}
+          <button
+            onClick={() => setOpen(!open)}
+            className="w-11 h-11 flex items-center justify-center rounded-xl hover:bg-pink-50 transition-colors duration-300"
+          >
+            {open ? (
+              <HiX size={32} className="text-pink-600" />
+            ) : (
+              <HiMenu size={32} className="text-gray-800" />
+            )}
           </button>
         </div>
 

@@ -10,9 +10,15 @@ import {
   FaBed,
 } from "react-icons/fa";
 
-import hero from "../assets/hero.jpg";
+import useSanityQuery from "../hooks/useSanityQuery";
+import { websiteQuery } from "../lib/queries";
+import { urlFor } from "../lib/image";
 
 export default function MobileHero() {
+  const { data: website, loading } = useSanityQuery(websiteQuery);
+
+  if (loading || !website) return null;
+
   return (
     <section className="relative overflow-hidden bg-[#faf7f8] pt-6 md:pt-32 px-4 pb-8">
       {/* Background Blob 1 */}
@@ -31,8 +37,12 @@ export default function MobileHero() {
 
         <div className="relative overflow-hidden rounded-t-[30px]">
           <img
-            src={hero}
-            alt=""
+            src={
+              website?.heroImage
+                ? urlFor(website.heroImage).width(1800).url()
+                : ""
+            }
+            alt={website.heroTitle || "Hero"}
             className="w-full h-[255px] object-cover transition duration-700"
           />
 

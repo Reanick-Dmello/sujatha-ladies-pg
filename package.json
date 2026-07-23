@@ -10,6 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@portabletext/react": "^6.2.0",
+    "@sanity/client": "^7.23.2",
+    "@sanity/image-url": "^2.1.1",
     "@tailwindcss/vite": "^4.3.1",
     "framer-motion": "^12.42.0",
     "lucide-react": "^1.21.0",

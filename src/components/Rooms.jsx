@@ -8,51 +8,17 @@ import {
   BedDouble,
 } from "lucide-react";
 import PremiumRoomCard from "./PremiumRoomCard";
-import room1 from "../assets/1room.jpg";
-import room2 from "../assets/2room.jpg";
-import room3 from "../assets/3room.jpg";
-
-const rooms = [
-  {
-    id: 1,
-    title: "Single Sharing",
-    price: "₹8,000",
-    featured: true,
-    image: room1,
-    features: [
-      "Attached Bathroom",
-      "High-Speed WiFi",
-      "Study Table",
-      "Wardrobe",
-    ],
-  },
-  {
-    id: 2,
-    title: "Double Sharing",
-    price: "₹5,500",
-    image: room2,
-    features: [
-      "Attached Bathroom",
-      "High-Speed WiFi",
-      "Study Table",
-      "Wardrobe",
-    ],
-  },
-  {
-    id: 3,
-    title: "Triple Sharing",
-    price: "₹4,000",
-    image: room3,
-    features: [
-      "Attached Bathroom",
-      "High-Speed WiFi",
-      "Study Table",
-      "Wardrobe",
-    ],
-  },
-];
+import useSanityQuery from "../hooks/useSanityQuery";
+import { roomsQuery } from "../lib/queries";
+import { urlFor } from "../lib/image";
 
 export default function Rooms() {
+  const { data: rooms, loading } = useSanityQuery(roomsQuery);
+
+  if (loading) return null;
+
+  if (!rooms?.length) return null;
+
   return (
     <section id="rooms" className="py-10 bg-pink-50">
       <div className="hidden lg:block">
@@ -79,7 +45,7 @@ export default function Rooms() {
 
           <div className="grid lg:grid-cols-3 gap-7">
             {rooms.map((room) => (
-              <PremiumRoomCard key={room.id} room={room} />
+              <PremiumRoomCard key={room._id} room={room} />
             ))}
           </div>
         </div>
@@ -109,8 +75,8 @@ export default function Rooms() {
 
         <div className="mt-8 space-y-6 px-4">
           {rooms.map((room) => (
-            <MobileRoomCard key={room.title} room={room} />
-          ))}
+  <MobileRoomCard key={room._id} room={room} />
+))}
         </div>
       </div>
     </section>
@@ -124,7 +90,11 @@ function MobileRoomCard({ room }) {
 
       <div className="relative">
         <img
-          src={room.image}
+          src={
+            room.images?.length
+              ? urlFor(room.images[0]).width(800).height(500).url()
+              : ""
+          }
           alt=""
           className="w-full h-[160px] object-cover"
         />
