@@ -7,24 +7,6 @@ export default defineType({
 
   fields: [
     defineField({
-      name: 'title',
-      title: 'Image Title',
-      type: 'string',
-      validation: (Rule) => Rule.required(),
-      description: 'Example: Deluxe Room',
-    }),
-
-    defineField({
-      name: 'image',
-      title: 'Gallery Image',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
-      validation: (Rule) => Rule.required(),
-    }),
-
-    defineField({
       name: 'category',
       title: 'Category',
       type: 'string',
@@ -35,31 +17,31 @@ export default defineType({
           {title: 'Amenities', value: 'Amenities'},
           {title: 'Exterior', value: 'Exterior'},
         ],
-        layout: 'dropdown',
       },
       validation: (Rule) => Rule.required(),
     }),
 
     defineField({
-      name: 'caption',
-      title: 'Caption',
-      type: 'text',
-      rows: 3,
-    }),
-
-    defineField({
-      name: 'featured',
+      name: 'featuredImage',
       title: 'Featured Image',
-      type: 'boolean',
-      initialValue: false,
-      description: 'Used as the large featured image.',
+      type: 'number',
+      initialValue: 0,
+      description: '0 = first image, 1 = second image...',
     }),
 
     defineField({
-      name: 'showOnHomepage',
-      title: 'Show on Homepage',
-      type: 'boolean',
-      initialValue: false,
+      name: 'images',
+      title: 'Upload Images',
+      type: 'array',
+      of: [
+        {
+          type: 'image',
+          options: {
+            hotspot: true,
+          },
+        },
+      ],
+      validation: (Rule) => Rule.min(1),
     }),
 
     defineField({
@@ -70,33 +52,10 @@ export default defineType({
     }),
   ],
 
-  orderings: [
-    {
-      title: 'Display Order',
-      name: 'displayOrder',
-      by: [
-        {
-          field: 'displayOrder',
-          direction: 'asc',
-        },
-      ],
-    },
-  ],
-
   preview: {
     select: {
-      title: 'title',
-      subtitle: 'category',
-      media: 'image',
-      featured: 'featured',
-    },
-
-    prepare({title, subtitle, media, featured}) {
-      return {
-        title,
-        subtitle: `${subtitle}${featured ? ' ⭐ Featured' : ''}`,
-        media,
-      }
+      title: 'category',
+      media: 'images.0',
     },
   },
 })

@@ -16,7 +16,12 @@ export const roomsQuery = `
 `;
 
 export const galleryQuery = `
-*[_type=="gallery"] | order(displayOrder asc)
+*[_type=="gallery"] | order(displayOrder asc){
+  _id,
+  category,
+  featuredImage,
+  images
+}
 `;
 
 export const reviewsQuery = `

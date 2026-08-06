@@ -1,9 +1,11 @@
 import { useMemo, useState } from "react";
-import { galleryImages } from "../../data/galleryData";
 import FeaturedGallery from "./FeaturedGallery";
 import ThumbnailGrid from "./ThumbnailGrid";
 import GalleryFilter from "./GalleryFilter";
 import LightboxViewer from "./LightboxViewer";
+import useSanityQuery from "../../hooks/useSanityQuery";
+import { galleryQuery } from "../../lib/queries";
+import { urlFor } from "../../lib/image";
 
 const categories = ["All", "Rooms", "Food", "Amenities", "Exterior"];
 
@@ -11,17 +13,34 @@ export default function Gallery() {
   const [category, setCategory] = useState("All");
   const [open, setOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState(0);
+  const { data, loading } = useSanityQuery(galleryQuery);
+
+  const galleryImages = useMemo(() => {
+    if (!data) return [];
+
+    return data.flatMap((section) =>
+      section.images.map((image, index) => ({
+        id: `${section._id}-${index}`,
+        image: urlFor(image).width(1800).quality(90).url(),
+        title: section.category,
+        category: section.category,
+        featured: index === section.featuredImage,
+      })),
+    );
+  }, [data]);
 
   const filteredImages = useMemo(() => {
     if (category === "All") return galleryImages;
 
     return galleryImages.filter((item) => item.category === category);
-  }, [category]);
+  }, [category, galleryImages]);
 
   const featured =
-    filteredImages.find((img) => img.featured) || filteredImages[0];
+    filteredImages.find((img) => img.featured) || filteredImages[0] || null;
 
-  const thumbnails = filteredImages.filter((img) => img.id !== featured.id);
+  const thumbnails = featured
+    ? filteredImages.filter((img) => img.id !== featured.id)
+    : [];
 
   const openGallery = (image) => {
     const index = filteredImages.findIndex((item) => item.id === image.id);
@@ -29,6 +48,15 @@ export default function Gallery() {
     setSelectedImage(index);
     setOpen(true);
   };
+
+  if (loading) return null;
+
+  if (!galleryImages.length) return null;
+
+  console.log("Sanity Data:", data);
+  console.log("Gallery Images:", galleryImages);
+  console.log("Filtered Images:", filteredImages);
+  console.log("Featured:", featured);
 
   return (
     <section id="gallery" className="py-10 bg-[#faf7f8]">
