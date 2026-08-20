@@ -146,12 +146,13 @@ export default defineType({
       rows: 3,
       group: 'contact',
     }),
-
+    
     defineField({
       name: 'googleMaps',
-      title: 'Google Maps URL',
+      title: 'Google Maps Location',
       type: 'url',
       group: 'contact',
+      description: 'Paste the Google Maps location link here.',
     }),
 
     // ---------------- BRANDING ----------------
