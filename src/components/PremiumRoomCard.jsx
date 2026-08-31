@@ -102,7 +102,7 @@ export default function PremiumRoomCard({ room }) {
         <motion.a
           whileHover={{ x: 4 }}
           whileTap={{ scale: 0.98 }}
-          href={`https://wa.me/${website?.whatsapp}`}
+          href={`https://wa.me/+91${website?.whatsapp}`}
           target="_blank"
           rel="noreferrer"
           className="flex items-center justify-center gap-3 h-14 rounded-2xl text-white font-semibold transition bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 shadow-lg hover:shadow-pink-300/50"

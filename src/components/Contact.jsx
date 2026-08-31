@@ -86,7 +86,7 @@ export default function Contact() {
               </a>
 
               <a
-                href={`https://wa.me/${website.whatsapp}`}
+                href={`https://wa.me/+91${website.whatsapp}`}
                 className="h-14 rounded-2xl border border-green-500 text-green-600 flex items-center justify-center font-semibold hover:bg-green-50 transition"
               >
                 WhatsApp

@@ -75,8 +75,8 @@ export default function Rooms() {
 
         <div className="mt-8 space-y-6 px-4">
           {rooms.map((room) => (
-  <MobileRoomCard key={room._id} room={room} />
-))}
+            <MobileRoomCard key={room._id} room={room} />
+          ))}
         </div>
       </div>
     </section>
@@ -119,10 +119,13 @@ function MobileRoomCard({ room }) {
       </div>
 
       <div className="px-4 pb-4">
-        <button className="w-full h-11 rounded-xl border border-pink-400 bg-white text-pink-600 font-semibold flex items-center justify-center gap-2 transition hover:bg-pink-50">
-          <MessageCircle size={16} />
-          Enquire Now
-        </button>
+        <a
+  href="#contact"
+  className="w-full h-11 rounded-xl border border-pink-400 bg-white text-pink-600 font-semibold flex items-center justify-center gap-2 transition hover:bg-pink-50"
+>
+  <MessageCircle size={16} />
+  Enquire Now
+</a>
       </div>
     </div>
   );

@@ -123,8 +123,12 @@ export default function About() {
 
           <div className="mt-8 overflow-hidden rounded-[28px] shadow-[0_20px_50px_rgba(0,0,0,0.12)]">
             <img
-              src={about}
-              alt="Sujatha Ladies PG"
+              src={
+                website?.heroImage
+                  ? urlFor(website.aboutImage).width(1800).url()
+                  : ""
+              }
+              alt={website.aboutTitle || "About"}
               className="w-full h-[240px] object-cover"
             />
           </div>

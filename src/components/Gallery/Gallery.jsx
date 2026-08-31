@@ -53,10 +53,7 @@ export default function Gallery() {
 
   if (!galleryImages.length) return null;
 
-  console.log("Sanity Data:", data);
-  console.log("Gallery Images:", galleryImages);
-  console.log("Filtered Images:", filteredImages);
-  console.log("Featured:", featured);
+ 
 
   return (
     <section id="gallery" className="py-10 bg-[#faf7f8]">
@@ -91,7 +88,7 @@ export default function Gallery() {
 
         {/* Filter */}
 
-        <div className="mt-10">
+        <div className="mt-10 mx-4">
           <GalleryFilter
             category={category}
             setCategory={setCategory}
@@ -102,7 +99,7 @@ export default function Gallery() {
 
         {/* Gallery */}
 
-        <div className="mt-10">
+        <div className="mt-10 mx-4">
           <FeaturedGallery
             image={featured}
             onClick={() => openGallery(featured)}

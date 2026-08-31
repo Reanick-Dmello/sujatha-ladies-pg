@@ -48,14 +48,6 @@ export default defineType({
     }),
 
     defineField({
-      name: 'heroBadge',
-      title: 'Hero Badge',
-      type: 'string',
-      group: 'home',
-      initialValue: '❤️ SAFE • COMFORTABLE • LIKE HOME',
-    }),
-
-    defineField({
       name: 'heroTitle',
       title: 'Hero Title',
       type: 'string',
@@ -68,22 +60,6 @@ export default defineType({
       type: 'text',
       rows: 4,
       group: 'home',
-    }),
-
-    defineField({
-      name: 'primaryButton',
-      title: 'Primary Button Text',
-      type: 'string',
-      group: 'home',
-      initialValue: 'Book a Visit',
-    }),
-
-    defineField({
-      name: 'secondaryButton',
-      title: 'Secondary Button Text',
-      type: 'string',
-      group: 'home',
-      initialValue: 'WhatsApp Now',
     }),
 
     // ---------------- ABOUT ----------------
@@ -146,7 +122,7 @@ export default defineType({
       rows: 3,
       group: 'contact',
     }),
-    
+
     defineField({
       name: 'googleMaps',
       title: 'Google Maps Location',
@@ -172,50 +148,6 @@ export default defineType({
       title: 'Favicon',
       type: 'image',
       group: 'branding',
-    }),
-
-    // ---------------- FOOTER ----------------
-
-    defineField({
-      name: 'footerDescription',
-      title: 'Footer Description',
-      type: 'text',
-      rows: 3,
-      group: 'footer',
-    }),
-
-    defineField({
-      name: 'copyright',
-      title: 'Copyright Text',
-      type: 'string',
-      group: 'footer',
-    }),
-
-    // ---------------- SEO ----------------
-
-    defineField({
-      name: 'seoTitle',
-      title: 'SEO Title',
-      type: 'string',
-      group: 'seo',
-    }),
-
-    defineField({
-      name: 'seoDescription',
-      title: 'SEO Description',
-      type: 'text',
-      rows: 3,
-      group: 'seo',
-    }),
-
-    defineField({
-      name: 'seoImage',
-      title: 'Open Graph Image',
-      type: 'image',
-      group: 'seo',
-      options: {
-        hotspot: true,
-      },
     }),
   ],
 

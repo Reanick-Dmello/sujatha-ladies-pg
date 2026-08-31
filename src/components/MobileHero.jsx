@@ -39,27 +39,40 @@ export default function MobileHero() {
           <img
             src={
               website?.heroImage
-                ? urlFor(website.heroImage).width(1800).url()
+                ? urlFor(website.heroImage).width(1800).quality(90).url()
                 : ""
             }
-            alt={website.heroTitle || "Hero"}
-            className="w-full h-[255px] object-cover transition duration-700"
+            alt={website.heroTitle || "Sujatha Ladies PG"}
+            className="
+      w-full
+      h-[330px]
+      object-cover
+      object-[50%_100%]
+      transition-transform
+      duration-700
+    "
           />
 
-          {/* White Fade */}
-
+          {/* Soft fade into content */}
           <div
-            className="absolute bottom-0 left-0 w-full h-28"
+            className="
+      absolute
+      bottom-0
+      left-0
+      w-full
+      h-24
+      pointer-events-none
+    "
             style={{
               background:
-                "linear-gradient(to top, #faf7f8 0%, rgba(250,247,248,0) 100%)",
+                "linear-gradient(to top, #faf7f8 0%, rgba(250,247,248,0.75) 35%, rgba(250,247,248,0) 100%)",
             }}
           />
         </div>
 
         {/* White Content */}
 
-        <div className="bg-[#faf7f8] -mt-10 relative z-20 rounded-t-[30px]  pb-5">
+        <div className="bg-[#faf7f8] -mt-5 relative z-20 rounded-t-[30px] pb-5">
           {/* Badge */}
 
           <div className="flex justify-center">
@@ -113,15 +126,20 @@ export default function MobileHero() {
           {/* Buttons */}
 
           <div className="mt-8 space-y-2">
-            <button className="w-full h-14 rounded-3xl bg-pink-600 text-white font-semibold flex items-center justify-center gap-2 shadow-lg hover:-translate-y-1 transition-all shadow-lg hover:-translate-y-1 transition-all hover:bg-pink-50">
+            {/* <button className="w-full h-14 rounded-3xl bg-pink-600 text-white font-semibold flex items-center justify-center gap-2 shadow-lg hover:-translate-y-1 transition-all shadow-lg hover:-translate-y-1 transition-all hover:bg-pink-50">
               <FaCalendarAlt />
               Book a Visit
-            </button>
+            </button> */}
 
-            <button className="w-full h-14 rounded-3xl border-2 border-pink-400 bg-white text-pink-600 font-semibold flex items-center justify-center gap-2 shadow-lg hover:-translate-y-1 transition-all hover:bg-pink-50">
+            <a
+              href={`https://wa.me/+91${website.whatsapp}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full h-14 rounded-3xl border-2 border-pink-400 bg-white text-pink-600 font-semibold flex items-center justify-center gap-2 shadow-lg hover:-translate-y-1 transition-all hover:bg-pink-50"
+            >
               <FaWhatsapp />
               WhatsApp Now
-            </button>
+            </a>
           </div>
 
           <div className="mt-8 flex justify-center gap-3 flex-wrap">
@@ -163,18 +181,19 @@ export default function MobileHero() {
               {/* Rooms */}
 
               <div className="px-4 py-5 space-y-5">
-                <RoomRow room="Single Sharing" status="2 Rooms" />
-                <RoomRow room="Double Sharing" status="4 Beds" />
+                <RoomRow room="Single Sharing" status="Available" />
+                <RoomRow room="Double Sharing" status="Available" />
                 <RoomRow room="Triple Sharing" status="Available" />
+                <RoomRow room="Four Sharing" status="Available" />
               </div>
 
               {/* Button */}
 
-              <div className="px-6 pb-6">
+              {/* <div className="px-6 pb-6">
                 <button className="w-full h-14 rounded-3xl bg-pink-600 hover:bg-pink-700 text-white font-semibold transition shadow-lg hover:-translate-y-1 transition-all">
                   Reserve on WhatsApp
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

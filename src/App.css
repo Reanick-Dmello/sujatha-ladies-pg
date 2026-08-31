@@ -152,6 +152,9 @@
     }
   }
 }
+html {
+  scroll-behavior: smooth;
+}
 
 #spacer {
   height: 88px;

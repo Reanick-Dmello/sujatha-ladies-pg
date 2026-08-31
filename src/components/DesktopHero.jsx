@@ -102,7 +102,7 @@ export default function DesktopHero() {
               <FaCalendarAlt /> Book a Visit
             </button>
             <a
-              href={`https://wa.me/${website.whatsapp}`}
+              href={`https://wa.me/+91${website.whatsapp}`}
               target="_blank"
               rel="noreferrer"
               className="border-2 border-pink-500 bg-white hover:bg-pink-50 backdrop-blur-md text-pink-600 h-14 px-8 rounded-2xl font-semibold flex items-center gap-2 shadow-lg hover:shadow-pink-300/40 transition-all duration-300 hover:-translate-y-1"

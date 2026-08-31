@@ -19,16 +19,8 @@ const amenities = [
     title: "CCTV",
     title2: "Security",
   },
-  {
-    icon: <MdFingerprint />,
-    title: "Biometric",
-    title2: "Entry",
-  },
-  {
-    icon: <FaWifi />,
-    title: "High Speed",
-    title2: "WiFi",
-  },
+ 
+ 
   {
     icon: <FaBolt />,
     title: "Power",
